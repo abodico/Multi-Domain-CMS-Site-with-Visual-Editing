@@ -17,6 +17,7 @@ export const Footer: GlobalConfig = {
         {
           name: 'label',
           type: 'text',
+          localized: true,
         },
         {
           name: 'href',
@@ -31,6 +32,7 @@ export const Footer: GlobalConfig = {
         {
           name: 'label',
           type: 'text',
+          localized: true,
         },
         {
           name: 'href',
@@ -41,6 +43,16 @@ export const Footer: GlobalConfig = {
           type: 'text',
         },
       ],
+    },
+    {
+      name: 'direction',
+      type: 'select',
+      defaultValue: 'ltr',
+      options: [
+        { label: 'Left to Right', value: 'ltr' },
+        { label: 'Right to Left', value: 'rtl' },
+      ],
+      localized: true,
     },
   ],
 }

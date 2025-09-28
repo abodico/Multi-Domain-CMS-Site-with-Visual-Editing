@@ -320,6 +320,16 @@ const Pages: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'direction',
+      type: 'select',
+      defaultValue: 'ltr',
+      options: [
+        { label: 'Left to Right', value: 'ltr' },
+        { label: 'Right to Left', value: 'rtl' },
+      ],
+      localized: true,
+    },
   ],
   access: {
     read: ({ req: { user } }) => {

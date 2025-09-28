@@ -41,7 +41,6 @@ export default async function RootLayout({
             </head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
-                dir={isBrandA ? "ltr" : "rtl"}
             >
                 <Header isBrandA={isBrandA} />
                 {children}

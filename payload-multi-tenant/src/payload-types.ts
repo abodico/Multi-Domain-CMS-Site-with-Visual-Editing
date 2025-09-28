@@ -96,7 +96,7 @@ export interface Config {
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'ar';
   user: User & {
     collection: 'users';
   };
@@ -294,6 +294,7 @@ export interface Page {
     ogImage?: (string | null) | Media;
     keywords?: string | null;
   };
+  direction?: ('ltr' | 'rtl') | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -535,6 +536,7 @@ export interface PagesSelect<T extends boolean = true> {
         ogImage?: T;
         keywords?: T;
       };
+  direction?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -577,6 +579,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Navigation {
   id: string;
+  brandName?: string | null;
   links?:
     | {
         label?: string | null;
@@ -584,6 +587,7 @@ export interface Navigation {
         id?: string | null;
       }[]
     | null;
+  direction?: ('ltr' | 'rtl') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -608,6 +612,7 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  direction?: ('ltr' | 'rtl') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -616,6 +621,7 @@ export interface Footer {
  * via the `definition` "navigation_select".
  */
 export interface NavigationSelect<T extends boolean = true> {
+  brandName?: T;
   links?:
     | T
     | {
@@ -623,6 +629,7 @@ export interface NavigationSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
+  direction?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -647,6 +654,7 @@ export interface FooterSelect<T extends boolean = true> {
         icon?: T;
         id?: T;
       };
+  direction?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -52,4 +52,12 @@ export default buildConfig({
     }),
   ],
   globals: [Navigation, Footer],
+  localization: {
+    locales: [
+      { label: 'English', code: 'en' },
+      { label: 'Arabic', code: 'ar' },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
 })

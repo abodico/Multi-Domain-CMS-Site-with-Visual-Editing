@@ -6,24 +6,21 @@ type FooterLink = { label: string; href: string }
 export type FooterSocial = { label: string; href: string; icon: string }
 
 const Footer = async ({ isBrandA }: { isBrandA: boolean }) => {
+    const locale: "en" | "ar" = isBrandA ? "en" : "ar"
     try {
         const res = await axios.get(
-            `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/globals/footer`
+            `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/globals/footer?locale=${locale}`
         )
         const data = res.data
-
         const bgClass = !isBrandA ? "bg-green-700" : "bg-blue-700"
         const hoverClass = !isBrandA
             ? "hover:text-green-300"
             : "hover:text-blue-300"
-        const translations: Record<string, string> = {
-            Home: "الرئيسية",
-            About: "من نحن",
-        }
+
         return (
             <footer
                 className={`${bgClass} text-white py-10 px-4`}
-                dir={!isBrandA ? "rtl" : "ltr"}
+                dir={data.direction}
             >
                 <div className="container mx-auto flex flex-col md:flex-row justify-start lg:gap-20 gap-6">
                     {/* Links */}
@@ -38,9 +35,7 @@ const Footer = async ({ isBrandA }: { isBrandA: boolean }) => {
                                         href={link.href}
                                         className={`${hoverClass} transition-colors`}
                                     >
-                                        {isBrandA
-                                            ? link.label
-                                            : translations[link.label]}
+                                        {link.label}
                                     </a>
                                 </li>
                             ))}

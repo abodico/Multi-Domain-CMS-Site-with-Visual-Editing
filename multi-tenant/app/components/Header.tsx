@@ -7,25 +7,22 @@ interface Link {
     id: string
 }
 const Header = async ({ isBrandA }: { isBrandA: boolean }) => {
-    const translations: Record<string, string> = {
-        Home: "الرئيسية",
-        About: "من نحن",
-        Brand: "براند",
-    }
+    const locale: "en" | "ar" = isBrandA ? "en" : "ar"
     try {
         // Fetch tenant-specific homepage
         const res = await axios.get(
-            `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/globals/navigation`
+            `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/globals/navigation?locale=${locale}`
         )
 
         return (
             <div
                 className={`flex items-center gap-20 py-7 px-6 sticky top-0 z-50 backdrop-blur bg-white/40 border-b ${isBrandA ? "border-blue-200" : "border-green-200"}`}
+                dir={res.data.direction}
             >
                 <h2
                     className={`text-4xl ${isBrandA ? "text-blue-400 hover:text-blue-500" : "text-green-400 hover:text-green-500"} transition-all`}
                 >
-                    <a href="/">{isBrandA ? "Brand" : translations["Brand"]}</a>
+                    <a href="/">{res.data.brandName}</a>
                 </h2>
                 <ul className="flex gap-6 text-lg">
                     {res.data.links.map((item: Link) => (
@@ -34,9 +31,7 @@ const Header = async ({ isBrandA }: { isBrandA: boolean }) => {
                                 href={item.href}
                                 className={`${isBrandA ? "hover:text-blue-400" : "hover:text-green-400"} transition-all`}
                             >
-                                {isBrandA
-                                    ? item.label
-                                    : translations[item.label]}
+                                {item.label}
                             </a>
                         </li>
                     ))}
